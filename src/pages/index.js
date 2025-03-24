@@ -1,0 +1,24 @@
+import Alpine from "alpinejs";
+import { cancelPendingRequests } from "/src/utils/api/";
+import { loadPage, loadStyle } from "/src/utils/loader";
+
+import AlpineClass from "/src/utils/AlpineClass";
+
+export default class Page extends AlpineClass {
+    async load(target) {
+        if (!this.id) {
+            throw new Error("You must set a unique ID for this page");
+        }
+        Alpine.data(this.id, () => this);
+        await Promise.all([
+            loadPage(new URL("./index.html", this.meta.url).pathname, target),
+            ...this.importCSS.map((cssPath) => loadStyle(new URL(cssPath, this.meta.url).pathname)),
+        ]);
+        return target;
+    }
+
+    terminate() {
+        super.terminate();
+        cancelPendingRequests();
+    }
+}

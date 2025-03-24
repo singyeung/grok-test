@@ -1,0 +1,99 @@
+<div class="flex flex-col items-center justify-center grow bg-guest" x-data="LoginPage">
+    <div class="card max-w-[370px] w-full">
+        <form @keydown.enter.prevent class="card-body flex flex-col gap-5 p-10">
+            <div class="text-center mb-2.5">
+                <h3
+                    class="text-lg font-medium text-gray-900 leading-none mb-2.5"
+                    x-text="constant.app_short_name"
+                ></h3>
+                <div class="flex items-center justify-center font-medium">
+                    <span class="text-2sm text-gray-700 me-1.5" x-text="constant.app_name"></span>
+                </div>
+            </div>
+            <div class="flex flex-col gap-1">
+                <label for="input-username" class="form-label font-normal text-gray-900">
+                    Username
+                </label>
+                <input
+                    id="input-username"
+                    class="input"
+                    placeholder="Enter Username"
+                    type="text"
+                    :disabled="submitting"
+                    x-model="username"
+                    x-ref="username"
+                    x-init="$focus.focus($refs.username)"
+                    @keydown.tab="$focus.focus($refs.password)"
+                    @keydown.enter="$focus.focus($refs.password)"
+                />
+            </div>
+            <div class="flex flex-col gap-1">
+                <div class="flex items-center justify-between gap-1">
+                    <label for="input-password" class="form-label font-normal text-gray-900">
+                        Password
+                    </label>
+                    <a class="text-2sm link shrink-0" href="/forgot-password" data-navigo>
+                        Forgot Password?
+                    </a>
+                </div>
+                <div
+                    class="input"
+                    data-toggle-password="true"
+                    data-toggle-password-permanent="true"
+                    x-ref="togglePassword"
+                >
+                    <input
+                        id="input-password"
+                        placeholder="Enter Password"
+                        type="password"
+                        x-model="password"
+                        x-ref="password"
+                        :disabled="submitting"
+                        @keydown.tab="$focus.focus($refs.username)"
+                        @keydown.enter="valid && submit()"
+                    />
+                    <button class="btn btn-icon" data-toggle-password-trigger="true" type="button">
+                        <iconify-icon
+                            icon="mdi:eye"
+                            class="text-gray-500 toggle-password-active:hidden"
+                            inline
+                        ></iconify-icon>
+                        <iconify-icon
+                            icon="mdi:eye-off"
+                            class="text-gray-500 hidden toggle-password-active:block"
+                            inline
+                        ></iconify-icon>
+                    </button>
+                </div>
+                <span class="form-hint text-danger" x-text="errors.password"></span>
+            </div>
+            <div class="text-2xs">* Only one device can be logged into at the same time</div>
+            <button
+                class="btn btn-primary flex justify-center grow"
+                :class="(!valid || submitting) && 'disabled'"
+                type="button"
+                @click="submit"
+            >
+                Sign In
+                <iconify-icon
+                    x-show="submitting"
+                    icon="line-md:loading-twotone-loop"
+                    inline
+                ></iconify-icon>
+            </button>
+        </form>
+        <div class="card-footer justify-center gap-3">
+            <img
+                :src="`/assets/images/${constant.project_code}/maincon-logo.png`"
+                class="h-5"
+                alt="Main Contractor Logo"
+            />
+            <span class="text-xs" x-text="constant.maincon_short_name"></span>
+        </div>
+    </div>
+    <div class="text-white dark:text-black dark:font-bold text-xs mt-2">
+        ©
+        <span x-text="new Date().getFullYear()"></span>
+        Faith Tech Solutions Limited
+    </div>
+</div>

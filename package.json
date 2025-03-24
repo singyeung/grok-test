@@ -1,0 +1,20 @@
+{
+  "name": "grok-test",
+  "version": "1.0.0",
+  "type": "module",
+  "main": "bootstrap.js",
+  "dependencies": {
+    "@alpinejs/focus": "^3.14.9",
+    "@iconify/json": "^2.2.319",
+    "alpinejs": "^3.14.9",
+    "axios": "^1.8.4",
+    "axios-cache-interceptor": "^1.7.0",
+    "iconify-icon": "^2.3.0",
+    "lodash": "^4.17.21",
+    "luxon": "^3.5.0",
+    "navigo": "^8.11.1"
+  },
+  "devDependencies": {
+    "prettier": "^3.5.3"
+  }
+}

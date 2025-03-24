@@ -1,0 +1,45 @@
+<div class="flex items-center justify-center grow bg-guest" x-data="ForgotPasswordPage">
+    <div class="card max-w-[370px] w-full">
+        <form @keydown.enter.prevent class="card-body flex flex-col gap-5 p-10">
+            <div class="text-center">
+                <h3 class="text-lg font-medium text-gray-900">Username</h3>
+                <span class="text-2sm text-gray-700">Enter your username to reset password</span>
+            </div>
+            <div class="flex flex-col gap-1">
+                <label for="input-username" class="form-label font-normal text-gray-900">
+                    Username
+                </label>
+                <input
+                    id="input-username"
+                    class="input"
+                    :class="errors.username !== null && 'border-danger'"
+                    placeholder="Enter Username"
+                    type="text"
+                    :disabled="submitting"
+                    x-model="username"
+                    x-ref="username"
+                    x-init="$focus.focus($refs.username)"
+                    @keydown.enter="valid && submit()"
+                />
+            </div>
+            <button
+                class="btn btn-primary flex justify-center grow"
+                :class="(!valid || submitting) && 'disabled'"
+                type="button"
+                @click="submit"
+            >
+                Reset
+                <iconify-icon
+                    x-show="submitting"
+                    icon="line-md:loading-twotone-loop"
+                    inline
+                ></iconify-icon>
+            </button>
+        </form>
+        <div class="card-footer justify-center">
+            <a class="btn btn-link btn-sm" data-navigo href="/login">Back to login</a>
+        </div>
+    </div>
+
+    <template x-ref="SuccessModal"></template>
+</div>

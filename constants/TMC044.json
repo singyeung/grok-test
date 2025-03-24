@@ -1,0 +1,17 @@
+{
+    "project_code": "TMC044",
+
+    "matched_domains": ["https://tmc044.ftsl.hk"],
+
+    "api_base_url": "https://tmc044.ftsl.hk",
+    "api_grant_type": "password",
+    "api_client_id": "2",
+    "api_client_secret": "VHchVB7DFsYxk179CwcdGolWkOo0T0nc1VZIuyE0",
+    "api_scope": "*",
+
+    "system": "hms",
+    "app_name": "Hospital Maintenance System",
+    "app_short_name": "HMS",
+
+    "maincon_short_name": "CW - KS JV"
+}

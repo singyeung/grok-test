@@ -1,0 +1,24 @@
+[x-cloak] {
+    display: none !important;
+}
+
+html,
+body,
+#app {
+    height: 100% !important;
+    margin: 0 !important;
+}
+
+.launching-backdrop {
+    height: 100% !important;
+    width: 100% !important;
+    display: flex !important;
+    flex-direction: column !important;
+    justify-content: center !important;
+    align-items: center !important;
+}
+
+.launching-backdrop > img {
+    width: 50px;
+    height: 50px;
+}

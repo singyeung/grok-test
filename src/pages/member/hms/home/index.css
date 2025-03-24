@@ -1,0 +1,9 @@
+@layer utilities {
+    .sing {
+        color: #00ff00;
+    }
+}
+
+.ftsl-text-sing {
+    font-weight: bold;
+}

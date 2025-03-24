@@ -1,0 +1,104 @@
+<div class="flex items-center justify-center grow bg-guest" x-data="ResetPasswordPage">
+    <div class="card max-w-[370px] w-full">
+        <form @keydown.enter.prevent class="card-body flex flex-col gap-5 p-10">
+            <div class="text-center">
+                <h3 class="text-lg font-medium text-gray-900">Reset Password</h3>
+                <span class="text-2sm text-gray-700">Enter your new password</span>
+            </div>
+            <div class="flex flex-col gap-1">
+                <label for="input-username" class="form-label font-normal text-gray-900">
+                    Username
+                </label>
+                <input id="input-username" class="input" type="text" x-model="username" disabled />
+            </div>
+            <div class="flex flex-col gap-1">
+                <label for="input-password" class="form-label text-gray-900">New Password</label>
+                <div
+                    class="input"
+                    :class="errors.password !== null && 'border-danger'"
+                    data-toggle-password="true"
+                    data-toggle-password-permanent="true"
+                    x-ref="togglePassword"
+                >
+                    <input
+                        id="input-password"
+                        placeholder="Enter a new password"
+                        type="password"
+                        autocomplete="new-password"
+                        :disabled="submitting"
+                        x-model="password"
+                        x-ref="password"
+                        x-init="$focus.focus($refs.password)"
+                        @keydown.tab="$focus.focus($refs.confirmPassword)"
+                        @keydown.enter="$focus.focus($refs.confirmPassword)"
+                    />
+                    <button class="btn btn-icon" data-toggle-password-trigger="true" type="button">
+                        <iconify-icon
+                            icon="mdi:eye"
+                            class="text-gray-500 toggle-password-active:hidden"
+                            inline
+                        ></iconify-icon>
+                        <iconify-icon
+                            icon="mdi:eye-off"
+                            class="text-gray-500 hidden toggle-password-active:block"
+                            inline
+                        ></iconify-icon>
+                    </button>
+                </div>
+                <span class="form-hint text-danger" x-text="errors.password"></span>
+            </div>
+            <div class="flex flex-col gap-1">
+                <label for="input-confirm-password" class="form-label font-normal text-gray-900">
+                    Confirm New Password
+                </label>
+                <div
+                    class="input"
+                    :class="errors.confirmPassword !== null && 'border-danger'"
+                    data-toggle-password="true"
+                    data-toggle-password-permanent="true"
+                    x-ref="toggleConfirmPassword"
+                >
+                    <input
+                        id="input-confirm-password"
+                        placeholder="Re-enter a new Password"
+                        type="password"
+                        autocomplete="new-password"
+                        :disabled="submitting"
+                        x-model="confirmPassword"
+                        x-ref="confirmPassword"
+                        @keydown.tab="$focus.focus($refs.password)"
+                        @keydown.enter="valid && submit()"
+                    />
+                    <button class="btn btn-icon" data-toggle-password-trigger="true" type="button">
+                        <iconify-icon
+                            icon="mdi:eye"
+                            class="text-gray-500 toggle-password-active:hidden"
+                            inline
+                        ></iconify-icon>
+                        <iconify-icon
+                            icon="mdi:eye-off"
+                            class="text-gray-500 hidden toggle-password-active:block"
+                            inline
+                        ></iconify-icon>
+                    </button>
+                </div>
+                <span class="form-hint text-danger" x-text="errors.confirmPassword"></span>
+            </div>
+            <button
+                class="btn btn-primary flex justify-center grow"
+                :class="(!valid || submitting) && 'disabled'"
+                type="button"
+                @click="submit"
+            >
+                Submit
+                <iconify-icon
+                    x-show="submitting"
+                    icon="line-md:loading-twotone-loop"
+                    inline
+                ></iconify-icon>
+            </button>
+        </form>
+    </div>
+
+    <template x-ref="SuccessModal"></template>
+</div>

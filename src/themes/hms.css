@@ -1,0 +1,11 @@
+@layer components {
+    .bg-guest {
+        @apply bg-center;
+        @apply bg-no-repeat;
+        @apply bg-cover;
+        @apply bg-black/50;
+        @apply dark:bg-white/50;
+        @apply bg-blend-overlay;
+        background-image: url("/assets/images/hms/bg-login.jpg");
+    }
+}

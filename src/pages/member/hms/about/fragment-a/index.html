@@ -1,0 +1,9 @@
+<div x-data="[[id]]" x-show="isActive">
+    <p>
+        Fragment A content:
+        <span x-text="info"></span>
+    </p>
+    <button @click="update">Update</button>
+    <button @click="toggle">Toggle Self</button>
+    <button @click="callParent">Call Parent</button>
+</div>

@@ -1,0 +1,22 @@
+<div x-data="homeData">
+    <h1 class="testing">Home</h1>
+    <p>
+        Welcome to the Home page! Current count:
+        <span x-text="count"></span>
+    </p>
+    <p>
+        Current time:
+        <span x-text="time"></span>
+    </p>
+    <button @click="increment" data-tooltip="#my_tooltip_content">
+        Increment
+    </button>
+    <button @click="decrement">Decrement</button>
+    <button @click="toggleCard1">Toggle Card 1</button>
+    <div x-ref="card1Container"></div>
+    <div x-ref="card2Container"></div>
+
+    <div class="tooltip" id="my_tooltip_content">
+        Hey, a delightful tooltip is here!
+    </div>
+</div>
