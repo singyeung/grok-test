@@ -7,12 +7,15 @@ export default class ResetPasswordSuccessModal extends Component {
 
     modal = null;
 
+    isShown = false;
+
     async init() {
         super.init();
         this.modal = KTModal.getInstance(this.$root);
     }
 
     show() {
+        this.isShown = true;
         this.modal.show();
     }
 
@@ -22,7 +25,12 @@ export default class ResetPasswordSuccessModal extends Component {
 
     async terminate() {
         await super.terminate();
-        this.modal.hide();
+        if (this.isShown) {
+            await new Promise((resolve) => {
+                this.modal.on("hidden", resolve);
+                this.modal.hide();
+            });
+        }
         this.modal.destroy();
         this.modal = null;
     }
