@@ -43,6 +43,12 @@ export default class AlpineClass {
         await Promise.all(Object.values(this.children).map((child) => child.load()));
     }
 
+    async newChild(fileName, $ref) {
+        const jsPath = new URL(`./${fileName}/`, this.meta.url).pathname;
+        const { default: ChildClass } = await import(`${jsPath}?v=${window.APP_VERSION}`);
+        return new ChildClass($ref);
+    }
+
     load() {
         throw new Error("You must implement the function 'load'");
     }

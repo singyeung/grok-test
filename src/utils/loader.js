@@ -8,7 +8,7 @@ async function fetchHtmlContent(htmlPath) {
     if (htmlCache[htmlPath]) {
         htmlContent = htmlCache[htmlPath];
     } else {
-        const response = await fetch(htmlPath, {
+        const response = await fetch(`${htmlPath}?v=${window.APP_VERSION}`, {
             headers: { Accept: "text/html" },
         });
         htmlContent = await response.text();
@@ -52,6 +52,8 @@ export async function loadStyle(cssPath) {
     styleTag.type = "text/tailwindcss";
     styleTag.dataset.path = cssPath;
     document.head.appendChild(styleTag);
-    const response = await fetch(cssPath, { headers: { Accept: "text/css" } });
+    const response = await fetch(`${cssPath}?v=${window.APP_VERSION}`, {
+        headers: { Accept: "text/css" },
+    });
     styleTag.textContent = await response.text();
 }

@@ -3,7 +3,7 @@ import { isAuthenticated } from "/src/utils/auth";
 let currentPageClass = null;
 
 async function initErrorPage(pageName) {
-    const { default: page } = await import(`/src/pages/error/${pageName}/`);
+    const { default: page } = await import(`/src/pages/error/${pageName}/?v=${window.APP_VERSION}`);
     if (currentPageClass !== null) {
         await currentPageClass.terminate();
     }
@@ -13,7 +13,7 @@ async function initErrorPage(pageName) {
 
 async function initGuestPage(pageName) {
     if (isAuthenticated()) throw new Error("member");
-    const { default: page } = await import(`/src/pages/guest/${pageName}/`);
+    const { default: page } = await import(`/src/pages/guest/${pageName}/?v=${window.APP_VERSION}`);
     if (currentPageClass !== null) {
         await currentPageClass.terminate();
     }
@@ -25,11 +25,13 @@ let memberPage = null;
 async function initMemberPage(system, pageName) {
     if (!isAuthenticated()) throw new Error("guest");
     if (!memberPage) {
-        const { default: MemberPage } = await import(`/src/pages/member/`);
+        const { default: MemberPage } = await import(`/src/pages/member/?v=${window.APP_VERSION}`);
         memberPage = new MemberPage();
         await memberPage.load("app");
     }
-    const { default: page } = await import(`/src/pages/member/${system}/${pageName}/`);
+    const { default: page } = await import(
+        `/src/pages/member/${system}/${pageName}/?v=${window.APP_VERSION}`
+    );
     if (currentPageClass !== null) {
         await currentPageClass.terminate();
     }

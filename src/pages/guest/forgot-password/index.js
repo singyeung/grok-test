@@ -1,7 +1,6 @@
 import { get } from "/src/utils/api/";
 
 import Page from "/src/pages/";
-import SuccessModal from "./modal-success/";
 
 export default class ForgotPasswordPage extends Page {
     id = "ForgotPasswordPage";
@@ -15,7 +14,7 @@ export default class ForgotPasswordPage extends Page {
     async init() {
         super.init();
         await this.setChildren({
-            SuccessModal: new SuccessModal(this.$refs.SuccessModal),
+            SuccessModal: await this.newChild("modal-success", this.$refs.SuccessModal),
         });
     }
 
