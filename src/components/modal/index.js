@@ -27,8 +27,8 @@ export default class ModalComponent extends Component {
         return import.meta;
     }
 
-    terminate() {
-        super.terminate();
+    async terminate() {
+        await super.terminate();
         this.content = null;
     }
 }

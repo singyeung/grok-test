@@ -68,8 +68,8 @@ export default class ResetPasswordPage extends Page {
         return import.meta;
     }
 
-    terminate() {
-        super.terminate();
+    async terminate() {
+        await super.terminate();
         KTTogglePassword.getInstance(this.$refs.togglePassword).destroy();
         KTTogglePassword.getInstance(this.$refs.toggleConfirmPassword).destroy();
     }

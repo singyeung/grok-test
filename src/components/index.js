@@ -30,8 +30,8 @@ export default class Component extends AlpineClass {
         return component;
     }
 
-    terminate() {
-        super.terminate();
+    async terminate() {
+        await super.terminate();
         this.container = null;
     }
 }

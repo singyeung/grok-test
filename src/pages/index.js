@@ -17,8 +17,8 @@ export default class Page extends AlpineClass {
         return target;
     }
 
-    terminate() {
-        super.terminate();
+    async terminate() {
         cancelPendingRequests();
+        await super.terminate();
     }
 }

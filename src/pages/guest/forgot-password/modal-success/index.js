@@ -20,9 +20,12 @@ export default class ForgotPasswordSuccessModal extends Component {
         return import.meta;
     }
 
-    terminate() {
-        super.terminate();
-        this.modal.hide();
+    async terminate() {
+        await super.terminate();
+        await new Promise((resolve) => {
+            this.modal.on("hidden", resolve);
+            this.modal.hide();
+        });
         this.modal.destroy();
         this.modal = null;
     }

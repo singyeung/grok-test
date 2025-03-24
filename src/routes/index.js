@@ -5,7 +5,7 @@ let currentPageClass = null;
 async function initErrorPage(pageName) {
     const { default: page } = await import(`/src/pages/error/${pageName}/`);
     if (currentPageClass !== null) {
-        currentPageClass.terminate();
+        await currentPageClass.terminate();
     }
     currentPageClass = new page();
     await currentPageClass.load("app");
@@ -15,7 +15,7 @@ async function initGuestPage(pageName) {
     if (isAuthenticated()) throw new Error("member");
     const { default: page } = await import(`/src/pages/guest/${pageName}/`);
     if (currentPageClass !== null) {
-        currentPageClass.terminate();
+        await currentPageClass.terminate();
     }
     currentPageClass = new page();
     await currentPageClass.load("app");
@@ -31,7 +31,7 @@ async function initMemberPage(system, pageName) {
     }
     const { default: page } = await import(`/src/pages/member/${system}/${pageName}/`);
     if (currentPageClass !== null) {
-        currentPageClass.terminate();
+        await currentPageClass.terminate();
     }
     currentPageClass = new page();
     await currentPageClass.load("member-container");

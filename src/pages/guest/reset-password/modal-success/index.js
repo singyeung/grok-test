@@ -20,8 +20,8 @@ export default class ResetPasswordSuccessModal extends Component {
         return import.meta;
     }
 
-    terminate() {
-        super.terminate();
+    async terminate() {
+        await super.terminate();
         this.modal.hide();
         this.modal.destroy();
         this.modal = null;

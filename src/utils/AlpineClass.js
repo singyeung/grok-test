@@ -49,10 +49,8 @@ export default class AlpineClass {
 
     destroy() {}
 
-    terminate() {
-        for (const [, child] of Object.entries(this.children)) {
-            child.terminate();
-        }
+    async terminate() {
+        await Promise.all(Object.values(this.children).map((child) => child.terminate()));
         this.constant = null;
         this.children = {};
         this._self = null;
