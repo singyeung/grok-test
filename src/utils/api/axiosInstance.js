@@ -2,6 +2,7 @@
 import axios from "axios";
 import { setupCache } from "axios-cache-interceptor";
 import Constants from "/constants/";
+import AuthStore, { ACCESS_TOKEN } from '/src/store/auth';
 
 const INFINITE_TTL = 100 * 365 * 24 * 60 * 60 * 1000; // 100 years in milliseconds
 
@@ -17,21 +18,13 @@ const axiosInstance = setupCache(
 
 // Request interceptor to add Authorization header
 axiosInstance.interceptors.request.use((config) => {
-    const token = localStorage.getItem("accessToken") || "";
+    if (config.url === '/oauth/token') return config;
+    const token = AuthStore.get(ACCESS_TOKEN);
     if (token) {
         config.headers.Authorization = `Bearer ${token}`;
     }
     return config;
 });
-
-// Response interceptor (minimal, as refresh logic is in auth.js)
-axiosInstance.interceptors.response.use(
-    (response) => response,
-    (error) => {
-        // Let auth.js handle 401 errors via its interceptor
-        return Promise.reject(error);
-    },
-);
 
 const getCacheTTL = (seconds) => (seconds === -1 ? INFINITE_TTL : seconds * 1000);
 

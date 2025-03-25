@@ -14,10 +14,10 @@ export default class Store {
     }
 
     constructor() {
-        this.reset();
+        this.reset(false);
     }
 
-    reset(force = false) {
+    reset(force = true) {
         if (this.isPersisted) {
             if (force || this.get() === null) {
                 localStorage.setItem(

@@ -37,7 +37,10 @@ router
         initMemberPage("hms", "contact").catch(Unauthorized);
     })
     // others
-    .on("/logout", logout)
+    .on("/logout", () => {
+        logout();
+        window.location.href = "/login";
+    })
     .notFound(() => {
         initErrorPage("404");
     })

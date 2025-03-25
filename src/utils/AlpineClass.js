@@ -44,7 +44,10 @@ export default class AlpineClass {
     }
 
     async newChild(fileName, $ref) {
-        const jsPath = new URL(`./${fileName}/`, this.meta.url).pathname;
+        const jsPath = new URL(
+            fileName.startsWith("/") ? fileName : `./${fileName}/`,
+            this.meta.url,
+        ).pathname;
         const { default: ChildClass } = await import(`${jsPath}?v=${window.APP_VERSION}`);
         return new ChildClass($ref);
     }

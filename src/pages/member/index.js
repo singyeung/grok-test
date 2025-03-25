@@ -1,17 +1,17 @@
+import { get } from "/src/utils/api/";
+import UserStore from "/src/store/user";
+
 import Page from "/src/pages/";
-import HeaderFrame from "/src/components/@frame/header/index.js";
 
 export default class MemberPage extends Page {
-    id = "MemberPage";
-
-    async init() {
-        super.init();
-        await this.setChildren({
-            Header: new HeaderFrame(this.$refs.HeaderFrame),
-        });
-    }
-
-    get meta() {
-        return import.meta;
+    async load(target) {
+        await get("/api/me")
+            .then((me) => {
+                UserStore.set(me);
+            })
+            .catch(() => {
+                window.location.href = "/login?expired=1";
+            });
+        return super.load(target);
     }
 }

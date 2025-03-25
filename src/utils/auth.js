@@ -1,4 +1,5 @@
 import AuthStore, { ACCESS_TOKEN, REFRESH_TOKEN } from "/src/store/auth";
+import UserStore from "/src/store/user";
 import { post, axiosInstance, clearCache } from "./api/";
 import Constants from "/constants/";
 
@@ -31,7 +32,7 @@ const processQueue = (error, token = null) => {
 export async function login(username, password) {
     try {
         const response = await post("/oauth/token", {
-            grant_type: Constants("api_grant_type"), // Adjust based on your OAuth server
+            grant_type: "password",
             client_id: Constants("api_client_id"),
             client_secret: Constants("api_client_secret"),
             scope: Constants("api_scope"),
@@ -48,7 +49,7 @@ export async function login(username, password) {
         if (error.status === 400) {
             throw new Error("These credentials do not match our records.");
         }
-        throw error
+        throw error;
     }
 }
 
@@ -73,15 +74,16 @@ async function refreshAccessToken() {
     try {
         const response = await post("/oauth/token", {
             grant_type: "refresh_token",
-            client_id: "2",
-            client_secret: "VHchVB7DFsYxk179CwcdGolWkOo0T0nc1VZIuyE0",
-            scope: "*",
+            client_id: Constants("api_client_id"),
+            client_secret: Constants("api_client_secret"),
+            scope: Constants("api_scope"),
             refresh_token: refreshToken,
         });
 
         const { access_token, refresh_token } = response;
         AuthStore.set(ACCESS_TOKEN, access_token);
         AuthStore.set(REFRESH_TOKEN, refresh_token); // Update refresh token if provided
+
         return access_token;
     } catch (error) {
         throw new Error("Refresh token expired or invalid");
@@ -92,9 +94,9 @@ async function refreshAccessToken() {
  * Logs out the user by clearing tokens and cache
  */
 export function logout() {
-    AuthStore.reset(true);
+    UserStore.reset();
+    AuthStore.reset();
     clearCache();
-    window.location.href = "/login";
 }
 
 // Configure axios interceptor for 401 handling with refresh token
@@ -102,7 +104,11 @@ axiosInstance.interceptors.response.use(
     (response) => response,
     async (error) => {
         const originalRequest = error.config;
-        if (error.response?.status === 401 && !originalRequest._retry) {
+        if (
+            originalRequest.url !== "/oauth/token" &&
+            error.response?.status === 401 &&
+            !originalRequest._retry
+        ) {
             originalRequest._retry = true;
 
             if (isRefreshing) {
@@ -128,7 +134,7 @@ axiosInstance.interceptors.response.use(
                 return axiosInstance(originalRequest); // Retry original request
             } catch (refreshError) {
                 processQueue(refreshError);
-                logout(); // Redirect to login if refresh fails
+                logout();
                 return Promise.reject(refreshError);
             } finally {
                 isRefreshing = false;

@@ -13,6 +13,25 @@ export default class LoginPage extends Page {
     submitting = false;
     errors = { password: null };
 
+    async init() {
+        await super.init();
+        await this.setChildren({
+            AuthExpiredModal: await this.newChild(
+                "modal-auth-expired",
+                this.$refs.AuthExpiredModal,
+            ),
+        });
+        this.children.AuthExpiredModal.onHide(() => {
+            this.$focus.focus(this.$refs.username);
+        });
+        const currentLocation = window.router.getCurrentLocation();
+        if (currentLocation.params !== null && currentLocation.params.expired) {
+            this.children.AuthExpiredModal.show();
+        } else {
+            this.$focus.focus(this.$refs.username);
+        }
+    }
+
     $watchUsername(username) {
         this.username = username.trim();
         this.valid = this.username !== "" && this.password !== "";

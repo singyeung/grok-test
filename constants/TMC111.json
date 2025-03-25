@@ -4,7 +4,6 @@
     "matched_domains": ["https://laravel.test", "https://grok.test"],
 
     "api_base_url": "https://laravel.test",
-    "api_grant_type": "password",
     "api_client_id": "2",
     "api_client_secret": "VHchVB7DFsYxk179CwcdGolWkOo0T0nc1VZIuyE0",
     "api_scope": "*",

@@ -22,7 +22,6 @@
                     :disabled="submitting"
                     x-model="username"
                     x-ref="username"
-                    x-init="$focus.focus($refs.username)"
                     @keydown.tab="$focus.focus($refs.password)"
                     @keydown.enter="$focus.focus($refs.password)"
                 />
@@ -96,4 +95,6 @@
         <span x-text="new Date().getFullYear()"></span>
         Faith Tech Solutions Limited
     </div>
+
+    <template x-ref="AuthExpiredModal"></template>
 </div>
