@@ -1,4 +1,5 @@
 import MemberPage from "/src/pages/member/";
+import Header from "/src/components/@header/hms/";
 
 export default class HMSPage extends MemberPage {
     id = "HMSPage";
@@ -6,10 +7,7 @@ export default class HMSPage extends MemberPage {
     async init() {
         super.init();
         await this.setChildren({
-            Header: await this.newChild(
-                "/src/components/@frame/header/",
-                this.$refs.Header,
-            )
+            Header: new Header(this.$refs.Header),
         });
     }
 

@@ -2,6 +2,7 @@ import { KTTogglePassword } from "metronic";
 import { login } from "/src/utils/auth";
 
 import Page from "/src/pages/";
+import AuthExpiredModal from "./modal-auth-expired/";
 
 export default class LoginPage extends Page {
     id = "LoginPage";
@@ -16,10 +17,7 @@ export default class LoginPage extends Page {
     async init() {
         await super.init();
         await this.setChildren({
-            AuthExpiredModal: await this.newChild(
-                "modal-auth-expired",
-                this.$refs.AuthExpiredModal,
-            ),
+            AuthExpiredModal: new AuthExpiredModal(this.$refs.AuthExpiredModal),
         });
         this.children.AuthExpiredModal.onHide(() => {
             this.$focus.focus(this.$refs.username);
@@ -49,7 +47,7 @@ export default class LoginPage extends Page {
 
         login(this.username, this.password).catch((error) => {
             this.submitting = false;
-            this.errors.password = error.message;
+            this.errors.password = error.response?.data?.message ?? error.message;
             this.password = "";
             this.$focus.focus(this.$refs.password);
         });

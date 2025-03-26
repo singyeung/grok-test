@@ -15,8 +15,6 @@ export default class AboutPage extends Page {
             fragmentA: new FragmentA(this.$refs.fragmentA),
         });
 
-        this.ready = true;
-
         this.refresh();
     }
 

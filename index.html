@@ -29,17 +29,10 @@
             }
         </script>
     </head>
-    <body>
-        <small style="display: none">::CLOUDFLARE_ERROR_500S_BOX::</small>
-        <div
-            id="app"
-            class="antialiased flex text-base text-gray-700 [--tw-page-bg:var(--tw-light)] [--tw-page-bg-dark:var(--tw-coal-500)] [--tw-header-height-default:95px] [[data-sticky-header=on]&]:[--tw-header-height:60px] [--tw-header-height:--tw-header-height-default] [--tw-header-height-mobile:70px] bg-[--tw-page-bg] dark:bg-[--tw-page-bg-dark]"
-            x-data="app"
-        >
-            <div class="launching-backdrop">
-                <img src="/assets/images/logo.svg" alt="logo" />
-            </div>
+    <body id="app" :class="frameClasses" x-data="app">
+        <div class="launching-backdrop">
+            <img src="/assets/images/logo.svg" alt="logo" />
         </div>
-        <script id="app-script" src="/app.js?v=20250324-225800" type="module"></script>
+        <script id="app-script" src="/app.js" type="module"></script>
     </body>
 </html>

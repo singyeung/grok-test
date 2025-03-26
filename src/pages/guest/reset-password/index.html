@@ -45,7 +45,10 @@
                         ></iconify-icon>
                     </button>
                 </div>
-                <span class="form-hint text-danger" x-text="errors.password"></span>
+                <span
+                    class="form-hint text-danger text-ellipsis overflow-hidden"
+                    x-text="errors.password"
+                ></span>
             </div>
             <div class="flex flex-col gap-1">
                 <label for="input-confirm-password" class="form-label font-normal text-gray-900">
@@ -82,7 +85,10 @@
                         ></iconify-icon>
                     </button>
                 </div>
-                <span class="form-hint text-danger" x-text="errors.confirmPassword"></span>
+                <span
+                    class="form-hint text-danger text-ellipsis overflow-hidden"
+                    x-text="errors.confirmPassword"
+                ></span>
             </div>
             <button
                 class="btn btn-primary flex justify-center grow"

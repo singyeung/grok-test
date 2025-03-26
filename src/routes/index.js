@@ -1,7 +1,8 @@
 import { isAuthenticated } from "/src/utils/auth";
-import { PatiencePromise } from '/src/utils/promise';
+import { PatiencePromise } from "/src/utils/promise";
 
 let currentPageClass = null;
+let memberPage = null;
 
 async function terminalCurrentPage() {
     if (currentPageClass === null) return;
@@ -13,7 +14,7 @@ async function terminalCurrentPage() {
 }
 
 async function initErrorPage(pageName) {
-    const { default: page } = await import(`/src/pages/error/${pageName}/?v=${window.APP_VERSION}`);
+    const { default: page } = await import(`/src/pages/error/${pageName}/`);
     await terminalCurrentPage();
     currentPageClass = new page();
     await currentPageClass.load("app");
@@ -21,25 +22,20 @@ async function initErrorPage(pageName) {
 
 async function initGuestPage(pageName) {
     if (isAuthenticated()) throw new Error("member");
-    const { default: page } = await import(`/src/pages/guest/${pageName}/?v=${window.APP_VERSION}`);
+    const { default: page } = await import(`/src/pages/guest/${pageName}/`);
     await terminalCurrentPage();
     currentPageClass = new page();
     await currentPageClass.load("app");
 }
 
-let memberPage = null;
 async function initMemberPage(system, pageName) {
     if (!isAuthenticated()) throw new Error("guest");
     if (!memberPage) {
-        const { default: MemberPage } = await import(
-            `/src/pages/member/${system}/?v=${window.APP_VERSION}`
-        );
+        const { default: MemberPage } = await import(`/src/pages/member/${system}/`);
         memberPage = new MemberPage();
         await memberPage.load("app");
     }
-    const { default: page } = await import(
-        `/src/pages/member/${system}/${pageName}/?v=${window.APP_VERSION}`
-    );
+    const { default: page } = await import(`/src/pages/member/${system}/${pageName}/`);
     await terminalCurrentPage();
     currentPageClass = new page();
     await currentPageClass.load(`${system}-container`);

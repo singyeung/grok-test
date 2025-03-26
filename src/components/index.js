@@ -6,9 +6,12 @@ import AlpineClass from "/src/utils/AlpineClass";
 export default class Component extends AlpineClass {
     container = null;
 
-    constructor(container) {
+    args = {};
+
+    constructor(container, args = {}) {
         super();
         this.container = container;
+        this.args = args;
     }
 
     async load() {
@@ -33,5 +36,6 @@ export default class Component extends AlpineClass {
     async terminate() {
         await super.terminate();
         this.container = null;
+        this.args = {};
     }
 }

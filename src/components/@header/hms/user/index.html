@@ -1,0 +1,141 @@
+<div x-data="User" class="menu" data-menu="true">
+    <div
+        class="menu-item menu-item-dropdown"
+        data-menu-item-offset="0, 10px"
+        data-menu-item-placement="bottom-end"
+        data-menu-item-placement-rtl="bottom-start"
+        data-menu-item-toggle="dropdown"
+        data-menu-item-trigger="click|lg:click"
+    >
+        <div
+            class="menu-toggle size-[34px] rounded-full inline-flex items-center justify-center relative text-lg font-medium border border-gray-300 bg-gray-100 text-gray-800"
+            x-text="user.name.toUpperCase().charAt(0)"
+        ></div>
+        <div class="menu-dropdown menu-default light:border-gray-300 w-screen max-w-[250px]">
+            <div class="flex items-start justify-between px-5 py-1.5 gap-1.5">
+                <div class="flex items-center gap-2 overflow-auto">
+                    <div class="flex flex-col gap-1.5 overflow-auto">
+                        <span
+                            class="text-sm text-gray-800 font-semibold leading-none"
+                            x-text="user.name"
+                        ></span>
+                        <span
+                            class="text-xs text-gray-600 font-medium leading-none overflow-auto text-ellipsis"
+                            x-text="user.email"
+                        ></span>
+                    </div>
+                </div>
+                <span class="badge badge-xs badge-primary badge-outline" x-text="user.username"></span>
+            </div>
+            <div class="menu-separator"></div>
+            <div class="flex flex-col">
+                <div class="menu-item">
+                    <a class="menu-link" href="#">
+                        <span class="menu-icon">
+                            <iconify-icon icon="mdi:secure-outline" inline></iconify-icon>
+                        </span>
+                        <span class="menu-title">Change Password</span>
+                    </a>
+                </div>
+                <div
+                    class="menu-item menu-item-dropdown"
+                    data-menu-item-offset="-50px, 0"
+                    data-menu-item-placement="left-start"
+                    data-menu-item-placement-rtl="right-start"
+                    data-menu-item-toggle="dropdown"
+                    data-menu-item-trigger="click|lg:hover"
+                >
+                    <div class="menu-link">
+                        <span class="menu-icon">
+                            <iconify-icon icon="mdi:user-multiple" inline></iconify-icon>
+                        </span>
+                        <span class="menu-title">Switch Account</span>
+                        <span class="menu-arrow">
+                            <iconify-icon icon="mdi:chevron-right" inline></iconify-icon>
+                        </span>
+                    </div>
+                    <div
+                        class="menu-dropdown menu-default light:border-gray-300 w-full max-w-[220px]"
+                    >
+                        <div class="menu-item">
+                            <a class="menu-link" href="#">
+                                <span class="menu-title">sing</span>
+                                <span class="menu-badge">
+                                    <span
+                                        class="flex items-center gap-1.5 rounded-md border border-gray-300 text-gray-600 px-1.5 py-1 text-2xs font-medium shrink-0"
+                                    >
+                                        <span class="font-mono">TCH111</span>
+                                        <iconify-icon
+                                            icon="mdi:tools"
+                                            class="text-base"
+                                            inline
+                                        ></iconify-icon>
+                                    </span>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="#">
+                                <span class="menu-title">sings</span>
+                                <span class="menu-badge">
+                                    <span
+                                        class="flex items-center gap-1.5 rounded-md border border-gray-300 text-gray-600 px-1.5 py-1 text-2xs font-medium shrink-0"
+                                    >
+                                        <span class="font-mono">TCH111</span>
+                                        <iconify-icon
+                                            icon="mdi:school-outline"
+                                            class="text-base"
+                                            inline
+                                        ></iconify-icon>
+                                    </span>
+                                </span>
+                            </a>
+                        </div>
+                        <div class="menu-item">
+                            <a class="menu-link" href="#">
+                                <span class="menu-title">singh</span>
+                                <span class="menu-badge">
+                                    <span
+                                        class="flex items-center gap-1.5 rounded-md border border-gray-300 text-gray-600 px-1.5 py-1 text-2xs font-medium shrink-0"
+                                    >
+                                        <span class="font-mono">TMC111</span>
+                                        <iconify-icon
+                                            icon="mdi:hospital-box"
+                                            class="text-base"
+                                            inline
+                                        ></iconify-icon>
+                                    </span>
+                                </span>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="menu-separator"></div>
+            <div class="flex flex-col">
+                <div class="menu-item mb-0.5">
+                    <div class="menu-link">
+                        <span class="menu-icon">
+                            <iconify-icon icon="mdi:lightbulb" inline></iconify-icon>
+                        </span>
+                        <span class="menu-title">Dark Mode</span>
+                        <label class="switch switch-sm">
+                            <input
+                                data-theme-state="dark"
+                                data-theme-toggle="true"
+                                name="check"
+                                type="checkbox"
+                                value="1"
+                            />
+                        </label>
+                    </div>
+                </div>
+                <div class="menu-item px-4 py-1.5">
+                    <a class="btn btn-sm btn-light justify-center" href="/logout" data-navigo>
+                        Log out
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

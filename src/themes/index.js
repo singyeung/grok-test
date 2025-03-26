@@ -1,11 +1,15 @@
+import "tailwindcss";
+import { getTailwindConfig } from "metronic";
+import IconifyIcon from "iconify-icon";
+import mdi from "@iconify/json/mdi.json" with { type: "json" };
+import lineMd from "@iconify/json/line-md.json" with { type: "json" };
+
 import ThemeStore, { THEME_LIGHT, THEME_DARK, THEME_SYSTEM } from "/src/store/theme";
 import { loadStyle } from "/src/utils/loader";
-import { getTailwindConfig } from "metronic";
 
 async function initTheme() {
-    import("tailwindcss");
-    window.tailwind = await getTailwindConfig();
-    await loadStyle("/src/themes/index.css");
+    const [config] = await Promise.all([getTailwindConfig(), loadStyle("/src/themes/index.css")]);
+    window.tailwind = config;
 
     const defaultThemeMode = THEME_LIGHT;
     let themeMode;
@@ -28,11 +32,6 @@ async function initTheme() {
 }
 
 async function initIcons() {
-    const [{ default: IconifyIcon }, { default: mdi }, { default: lineMd }] = await Promise.all([
-        import("iconify-icon"),
-        import("@iconify/json/mdi.json", { with: { type: "json" } }),
-        import("@iconify/json/line-md.json", { with: { type: "json" } }),
-    ]);
     IconifyIcon.addCollection(mdi);
     IconifyIcon.addCollection(lineMd);
 }

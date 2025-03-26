@@ -8,6 +8,7 @@ class UserStore extends Store {
     set(obj) {
         super.set(NAME, obj[NAME]);
         super.set(USERNAME, obj[USERNAME]);
+        super.set(EMAIL, obj[EMAIL]);
         super.set(IS_MC, obj[IS_MC]);
         super.set(IS_WORKER, obj[IS_WORKER]);
         super.set(CON_CODE, obj[CON_CODE]);
@@ -27,6 +28,7 @@ class UserStore extends Store {
         return {
             [NAME]: null,
             [USERNAME]: null,
+            [EMAIL]: null,
             [IS_MC]: null,
             [IS_WORKER]: null,
             [CON_CODE]: null,
@@ -40,6 +42,7 @@ class UserStore extends Store {
 
 export const NAME = "name";
 export const USERNAME = "username";
+export const EMAIL = "email";
 export const IS_MC = "is_mc";
 export const IS_WORKER = "is_worker";
 export const CON_CODE = "con_code";
