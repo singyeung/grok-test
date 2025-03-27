@@ -1,0 +1,21 @@
+{
+    "imports": {
+        "axios": "/node_modules/axios/dist/esm/axios",
+        "axios-cache-interceptor": "/node_modules/axios-cache-interceptor/dist/index.modern",
+        "cache-parser": "/vendors/@shim/cache-parser",
+        "fast-defer": "/vendors/@shim/fast-defer",
+        "object-code": "/vendors/@shim/object-code",
+
+        "alpinejs": "/vendors/@shim/alpinejs",
+        "navigo": "/vendors/@shim/navigo",
+        "lodash": "/vendors/@shim/lodash",
+        "luxon": "/node_modules/luxon/build/es6/luxon",
+
+        "iconify-icon": "/vendors/@shim/iconify-icon",
+        "@iconify/json/": "/node_modules/@iconify/json/json/",
+        "metronic": "/vendors/metronic/9.1.2/",
+        "tailwindcss": "/vendors/tailwindcss/3.4.14/tailwindcss.min",
+        "tailwindcss/plugin": "/vendors/tailwindcss/3.4.14/plugin",
+        "mini-svg-data-uri": "/vendors/mini-svg-data-uri/1.4.4/"
+    }
+}

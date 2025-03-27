@@ -1,6 +1,6 @@
 import Alpine from "alpinejs";
 import Constant from "/constants/";
-import initTheme from "/src/themes/";
+import initTheme from "./themes/";
 
 Alpine.data("app", () => ({
     frameClasses: '',
@@ -13,6 +13,6 @@ Alpine.data("app", () => ({
         }
         this.frameClasses = Constant("app_frame_class");
         await initTheme(system);
-        await import(`/src/routes/${system}`);
+        await import(`./routes/${system}`);
     },
 }));

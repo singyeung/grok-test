@@ -9,6 +9,7 @@
     "alpinejs": "^3.14.9",
     "axios": "^1.8.4",
     "axios-cache-interceptor": "^1.7.0",
+    "es-module-shims": "^2.0.10",
     "iconify-icon": "^2.3.0",
     "lodash": "^4.17.21",
     "luxon": "^3.5.0",
