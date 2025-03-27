@@ -2,14 +2,21 @@
     display: none !important;
 }
 
-html,
-body,
-#app {
+html:not(.light):not(.dark),
+body:not([ready]) {
     height: 100% !important;
+}
+
+body:not([ready]) {
+    transition: background-color 0.5s ease !important;
     margin: 0 !important;
 }
 
-.launching-backdrop {
+html[data-theme-mode="dark"] > body:not([ready]) {
+    background-color: #0D0E12 !important;
+}
+
+#backdrop-launching {
     height: 100% !important;
     width: 100% !important;
     display: flex !important;
@@ -18,7 +25,7 @@ body,
     align-items: center !important;
 }
 
-.launching-backdrop > img {
+#backdrop-launching > img {
     width: 50px;
     height: 50px;
 }

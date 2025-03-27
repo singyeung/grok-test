@@ -9,7 +9,7 @@
     >
         <div
             class="menu-toggle size-[34px] rounded-full inline-flex items-center justify-center relative text-lg font-medium border border-gray-300 bg-gray-100 text-gray-800"
-            x-text="user.name.toUpperCase().charAt(0)"
+            x-text="store.user.name.toUpperCase().charAt(0)"
         ></div>
         <div class="menu-dropdown menu-default light:border-gray-300 w-screen max-w-[250px]">
             <div class="flex items-start justify-between px-5 py-1.5 gap-1.5">
@@ -17,15 +17,18 @@
                     <div class="flex flex-col gap-1.5 overflow-auto">
                         <span
                             class="text-sm text-gray-800 font-semibold leading-none"
-                            x-text="user.name"
+                            x-text="store.user.name"
                         ></span>
                         <span
                             class="text-xs text-gray-600 font-medium leading-none overflow-auto text-ellipsis"
-                            x-text="user.email"
+                            x-text="store.user.email"
                         ></span>
                     </div>
                 </div>
-                <span class="badge badge-xs badge-primary badge-outline" x-text="user.username"></span>
+                <span
+                    class="badge badge-xs badge-primary badge-outline"
+                    x-text="store.user.username"
+                ></span>
             </div>
             <div class="menu-separator"></div>
             <div class="flex flex-col">
@@ -115,17 +118,21 @@
             <div class="flex flex-col">
                 <div class="menu-item mb-0.5">
                     <div class="menu-link">
-                        <span class="menu-icon">
+                        <span class="menu-icon" @click="$refs.ThemeSwitcher.click()">
                             <iconify-icon icon="mdi:lightbulb" inline></iconify-icon>
                         </span>
-                        <span class="menu-title">Dark Mode</span>
+                        <span class="menu-title" @click="$refs.ThemeSwitcher.click()">
+                            Dark Mode
+                        </span>
                         <label class="switch switch-sm">
                             <input
+                                x-ref="ThemeSwitcher"
                                 data-theme-state="dark"
                                 data-theme-toggle="true"
                                 name="check"
                                 type="checkbox"
                                 value="1"
+                                :checked="isDark"
                             />
                         </label>
                     </div>

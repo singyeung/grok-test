@@ -1,14 +1,17 @@
-import UserStore, { NAME, EMAIL, USERNAME } from "/src/store/user";
+import { THEME_DARK } from "/src/store/theme";
 import Component from "/src/components/";
 
 export default class User extends Component {
     id = "User";
 
-    user = null;
+    isDark = null;
 
-    async init() {
-        this.user = UserStore.get();
+    constructor(props) {
+        super(props);
+        this.isDark = this.store.theme === THEME_DARK;
     }
+
+    async init() {}
 
     get meta() {
         return import.meta;

@@ -1,25 +1,22 @@
 <!doctype html>
-<html data-theme="true" data-theme-mode="light" dir="ltr" lang="en">
+<html class="h-full" data-theme="true" data-theme-mode="light" dir="ltr" lang="en">
     <head>
         <meta charset="UTF-8" />
         <meta name="viewport" content="width=device-width, initial-scale=1.0" />
         <title>My SPA</title>
-        <link rel="stylesheet" href="/index.css" />
         <script>
-            window.APP_VERSION = "20250327-1000";
-            window.esmsInitOptions = {
-                shimMode: true,
-                fetch: (url, options) => {
-                    const connector = url.indexOf('?') !== -1 ? '&' : '?';
-                    return fetch(`${url}${connector}v=${window.APP_VERSION}`, options);
-                },
-            };
+            const noCache = Date.now();
+            const version = document.createElement("script");
+            version.src = `/version.js?t=${noCache}`;
+            document.head.appendChild(version);
+            const boot = document.createElement("script");
+            boot.src = `/boot.js?t=${noCache}`;
+            boot.type = "module";
+            document.head.appendChild(boot);
         </script>
-        <script async src="/node_modules/es-module-shims/dist/es-module-shims.js"></script>
-        <script src="/boot.js" type="module"></script>
     </head>
-    <body id="app" :class="frameClasses" x-data="app">
-        <div class="launching-backdrop">
+    <body id="app" :class="frameClasses" x-data="app" :ready="ready">
+        <div id="backdrop-launching" style="display: none">
             <img src="/assets/images/logo.svg" alt="logo" />
         </div>
     </body>

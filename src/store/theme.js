@@ -9,6 +9,10 @@ class ThemeStore extends Store {
         return THEME_LIGHT;
     }
 
+    set(value) {
+        localStorage.setItem(this.name, value);
+    }
+
     get isPersisted() {
         return true;
     }

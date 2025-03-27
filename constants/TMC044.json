@@ -15,5 +15,5 @@
     "maincon_short_name": "CW - KS JV",
     "maincon_chi_name": "俊和堅城",
 
-    "app_frame_class": "antialiased flex text-base text-gray-700 [--tw-page-bg:var(--tw-light)] [--tw-page-bg-dark:var(--tw-coal-500)] [--tw-header-height-default:95px] [[data-sticky-header=on]&]:[--tw-header-height:60px] [--tw-header-height:--tw-header-height-default] [--tw-header-height-mobile:70px] bg-[--tw-page-bg] dark:bg-[--tw-page-bg-dark]"
+    "app_frame_class": "antialiased flex h-full text-base text-gray-700 [--tw-page-bg:var(--tw-light)] [--tw-page-bg-dark:var(--tw-coal-500)] [--tw-header-height-default:95px] [[data-sticky-header=on]&]:[--tw-header-height:60px] [--tw-header-height:--tw-header-height-default] [--tw-header-height-mobile:70px] bg-[--tw-page-bg] dark:bg-[--tw-page-bg-dark]"
 }

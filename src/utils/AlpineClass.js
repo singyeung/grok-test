@@ -1,5 +1,9 @@
 import _ from "lodash";
 import Constant from "/constants/";
+import AppStore from '/src/store/app';
+import AuthStore from '/src/store/auth';
+import ThemeStore from '/src/store/theme';
+import UserStore from '/src/store/user';
 
 /**
  * @property {Object} $refs - References to Alpine $refs
@@ -15,9 +19,18 @@ export default class AlpineClass {
 
     constant = Constant();
 
+    store = null;
+
     _self = this;
 
-    constructor() {}
+    constructor() {
+        this.store = {
+            app: AppStore.get(),
+            auth: AuthStore.get(),
+            theme: ThemeStore.get(),
+            user: UserStore.get(),
+        };
+    }
 
     init() {
         Object.getOwnPropertyNames(Object.getPrototypeOf(this._self))
@@ -52,6 +65,7 @@ export default class AlpineClass {
     async terminate() {
         await Promise.all(Object.values(this.children).map((child) => child.terminate()));
         this.constant = null;
+        this.store = null;
         this.children = {};
         this._self = null;
     }
