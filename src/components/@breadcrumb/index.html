@@ -1,0 +1,26 @@
+<div x-data="Breadcrumb" class="flex flex-col gap-1">
+    <h1 class="font-medium text-lg text-gray-900" x-text="params.at(-1).name"></h1>
+    <div class="flex items-center gap-1 text-2sm">
+        <template x-for="(item, idx) in params" :key="item.name">
+            <span>
+                <template x-if="item.url && idx !== params.length - 1">
+                    <a
+                        class="text-gray-700 hover:text-primary"
+                        :href="item.url"
+                        data-navigo
+                        x-text="item.name"
+                    ></a>
+                </template>
+                <template x-if="!item.url || idx === params.length - 1">
+                    <span
+                        :class="idx === params.length - 1 ? 'text-gray-900' : 'text-gray-700'"
+                        x-text="item.name"
+                    ></span>
+                </template>
+                <template x-if="idx < params.length - 1">
+                    <span class="text-gray-400 text-sm">/</span>
+                </template>
+            </span>
+        </template>
+    </div>
+</div>

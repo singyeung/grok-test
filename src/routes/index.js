@@ -1,4 +1,4 @@
-import { isAuthenticated } from "/src/utils/auth";
+import { isAuthenticated } from "/src/services/auth";
 import { PatiencePromise } from "/src/utils/promise";
 
 let currentPageClass = null;

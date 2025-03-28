@@ -2,7 +2,7 @@ import Page from "/src/pages/";
 import CardComponent from "/src/components/card/";
 
 export default class HomePage extends Page {
-    id = "homeData";
+    id = "HomePage";
     count = 0;
     time = "";
 

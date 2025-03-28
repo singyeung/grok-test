@@ -2,9 +2,9 @@ import Alpine from "alpinejs";
 import { cancelPendingRequests } from "/src/utils/api/";
 import { loadPage, loadStyle } from "/src/utils/loader";
 
-import AlpineClass from "/src/utils/AlpineClass";
+import AlpineElement from "/src/utils/AlpineElement";
 
-export default class Page extends AlpineClass {
+export default class Page extends AlpineElement {
     async load(target) {
         if (!this.id) {
             throw new Error("You must set a unique ID for this page");

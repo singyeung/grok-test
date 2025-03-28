@@ -1,5 +1,6 @@
 import Navigo from "navigo";
-import { logout } from "/src/utils/auth";
+import Alpine from "alpinejs";
+import { logout } from "/src/services/auth";
 
 import { initErrorPage, initGuestPage, initMemberPage } from "./";
 
@@ -15,7 +16,14 @@ const AutoRedirect = (error) => {
     window.location.href = "/";
 };
 
+router.reactive = Alpine.reactive({ url: "" });
+
 router
+    .hooks({
+        after: (match) => {
+            router.reactive.url = match.url;
+        },
+    })
     // guest
     .on("/login", () => {
         initGuestPage("login").catch(AutoRedirect);
@@ -30,11 +38,11 @@ router
     .on("/", () => {
         initMemberPage("hms", "home").catch(Unauthorized);
     })
-    .on("/about", () => {
-        initMemberPage("hms", "about").catch(Unauthorized);
+    .on("/works-order", () => {
+        initMemberPage("hms", "order/works-order").catch(Unauthorized);
     })
-    .on("/contact", () => {
-        initMemberPage("hms", "contact").catch(Unauthorized);
+    .on("/cmms", () => {
+        initMemberPage("hms", "order/cmms").catch(Unauthorized);
     })
     // others
     .on("/logout", () => {

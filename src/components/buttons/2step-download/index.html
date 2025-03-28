@@ -1,0 +1,7 @@
+<div x-data="TwoStepDownloadButton" class="inline-block">
+    <button type="button" :class="params.className" @click="download">
+        <iconify-icon icon="mdi:tray-download" inline></iconify-icon>
+        <span x-text="params.text"></span>
+    </button>
+    <template x-ref="DownloadingModal"></template>
+</div>

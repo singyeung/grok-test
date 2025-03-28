@@ -1,0 +1,21 @@
+<div x-data="Menu" class="flex items-stretch" id="mega_menu_container">
+    <div
+        class="flex items-stretch"
+        data-reparent="true"
+        data-reparent-mode="prepend|lg:prepend"
+        data-reparent-target="body|lg:#mega_menu_container"
+    >
+        <div
+            class="hidden lg:flex lg:items-stretch"
+            data-drawer="true"
+            data-drawer-class="drawer drawer-start fixed z-10 top-0 bottom-0 w-full mr-5 max-w-[250px] p-5 lg:p-0 overflow-auto"
+            data-drawer-enable="true|lg:false"
+            id="mega_menu_wrapper"
+        >
+            <div class="menu flex-col lg:flex-row gap-5 lg:gap-7.5" data-menu="true" id="mega_menu">
+                <template x-ref="Boards"></template>
+                <template x-ref="Order"></template>
+            </div>
+        </div>
+    </div>
+</div>

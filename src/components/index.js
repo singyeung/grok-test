@@ -1,17 +1,17 @@
 import Alpine from "/vendors/@shim/alpinejs";
 import { loadComponent, loadStyle } from "/src/utils/loader";
 
-import AlpineClass from "/src/utils/AlpineClass";
+import AlpineElement from "/src/utils/AlpineElement";
 
-export default class Component extends AlpineClass {
+export default class Component extends AlpineElement {
     container = null;
 
-    args = {};
+    params = {};
 
-    constructor(container, args = {}) {
+    constructor(container, params = {}) {
         super();
         this.container = container;
-        this.args = args;
+        this.params = params;
     }
 
     async load() {
@@ -36,6 +36,6 @@ export default class Component extends AlpineClass {
     async terminate() {
         await super.terminate();
         this.container = null;
-        this.args = {};
+        this.params = {};
     }
 }

@@ -1,7 +1,8 @@
 import AuthStore, { ACCESS_TOKEN, REFRESH_TOKEN } from "/src/store/auth";
 import UserStore from "/src/store/user";
-import { post, axiosInstance, clearCache } from "./api/";
+import { get, post, axiosInstance, clearCache } from "/src/utils/api/";
 import Constants from "/constants/";
+import axios from "axios";
 
 // Track if a refresh is in progress
 let isRefreshing = false;
@@ -43,6 +44,13 @@ export async function login(username, password) {
         const { access_token, refresh_token } = response; // Expecting both tokens
         AuthStore.set(ACCESS_TOKEN, access_token);
         AuthStore.set(REFRESH_TOKEN, refresh_token);
+
+        const me = await get("/api/me");
+        if (me.project_code !== Constants('project_code')) {
+            AuthStore.reset(true);
+            await Promise.reject(new Error("These credentials do not match our records."));
+            return false;
+        }
 
         window.location.href = "/"; // Redirect to home
     } catch (error) {
@@ -103,6 +111,9 @@ export function logout() {
 axiosInstance.interceptors.response.use(
     (response) => response,
     async (error) => {
+        if (axios.isCancel(error)) {
+            return Promise.reject(error);
+        }
         const originalRequest = error.config;
         if (
             originalRequest.url !== "/oauth/token" &&

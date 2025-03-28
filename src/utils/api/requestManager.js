@@ -19,6 +19,7 @@ async function request(method, url, data = {}, config = {}, callback) {
         url,
         data,
         params: config.params,
+        responseType: config.responseType || undefined,
         cancelToken: source.token,
         errorHandler: config.errorHandler,
         cache: config.cacheTTL
@@ -33,6 +34,8 @@ async function request(method, url, data = {}, config = {}, callback) {
             isSuccess: false,
             error: null,
             data: null,
+            headers: null,
+            requestKey,
         });
     }
 
@@ -47,6 +50,7 @@ async function request(method, url, data = {}, config = {}, callback) {
                 isSuccess: true,
                 error: null,
                 data: response.data,
+                headers: response.headers,
             });
         }
 
@@ -54,17 +58,14 @@ async function request(method, url, data = {}, config = {}, callback) {
     } catch (error) {
         cancelTokens.delete(requestKey);
 
-        if (axios.isCancel(error)) {
-            return undefined;
-        }
-
-        if (typeof callback === "function") {
+        if (axios.isCancel(error) || typeof callback === "function") {
             callback({
                 isFetching: false,
                 isError: true,
                 isSuccess: false,
                 error: error.message,
                 data: null,
+                headers: null,
             });
         }
 
@@ -79,4 +80,11 @@ export const post = (url, data, config = {}, callback) =>
 export function cancelPendingRequests() {
     cancelTokens.forEach((source) => source.cancel("Navigation cancelled"));
     cancelTokens.clear();
+}
+
+export function cancelRequest(requestKey) {
+    if (cancelTokens.has(requestKey)) {
+        cancelTokens.get(requestKey).cancel("Request cancelled");
+        cancelTokens.delete(requestKey);
+    }
 }

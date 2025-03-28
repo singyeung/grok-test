@@ -1,9 +1,9 @@
 import _ from "lodash";
 import Constant from "/constants/";
-import AppStore from '/src/store/app';
-import AuthStore from '/src/store/auth';
-import ThemeStore from '/src/store/theme';
-import UserStore from '/src/store/user';
+import AppStore from "/src/store/app";
+import AuthStore from "/src/store/auth";
+import ThemeStore from "/src/store/theme";
+import UserStore from "/src/store/user";
 
 /**
  * @property {Object} $refs - References to Alpine $refs
@@ -12,7 +12,7 @@ import UserStore from '/src/store/user';
  * @property {Function} $dispatch - References to Alpine $dispatch function
  * @property {Function} $watch - References to Alpine $watch function
  */
-export default class AlpineClass {
+export default class AlpineElement {
     id = null;
 
     children = {};
@@ -36,7 +36,15 @@ export default class AlpineClass {
         Object.getOwnPropertyNames(Object.getPrototypeOf(this._self))
             .filter((func) => func.startsWith("$watch"))
             .forEach((func) => {
-                const funcName = _.camelCase(func.replace("$watch", ""));
+                const variableName = func.replace("$watch", "");
+                const camelFuncName = _.camelCase(variableName);
+                const snakeFuncName = _.snakeCase(variableName);
+                const dotFuncName = _.startCase(variableName).split(" ").join(".").toLowerCase();
+                const funcName = this[camelFuncName]
+                    ? camelFuncName
+                    : this[snakeFuncName]
+                      ? snakeFuncName
+                      : dotFuncName;
                 this.$watch(funcName, this[func].bind(this._self));
             });
     }

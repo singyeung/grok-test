@@ -1,5 +1,5 @@
 import { get } from "/src/utils/api/";
-import { logout } from "/src/utils/auth";
+import { logout } from "/src/services/auth";
 import UserStore from "/src/store/user";
 
 import Page from "/src/pages/";

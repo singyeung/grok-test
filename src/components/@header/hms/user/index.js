@@ -11,8 +11,6 @@ export default class User extends Component {
         this.isDark = this.store.theme === THEME_DARK;
     }
 
-    async init() {}
-
     get meta() {
         return import.meta;
     }

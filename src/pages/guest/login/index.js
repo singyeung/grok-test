@@ -1,5 +1,5 @@
 import { KTTogglePassword } from "metronic";
-import { login } from "/src/utils/auth";
+import { login } from "/src/services/auth";
 
 import Page from "/src/pages/";
 import AuthExpiredModal from "./modal-auth-expired/";
