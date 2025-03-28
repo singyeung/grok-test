@@ -5,7 +5,7 @@ export default class AgGrid extends Component {
         super(container, args);
     }
 
-    async init() {
+    init() {
         super.init();
     }
 

@@ -6,7 +6,7 @@ export default class Menu extends Component {
     id = "Menu";
 
     async init() {
-        await super.init();
+        super.init();
         await this.setChildren({
             Boards: new Boards(this.$refs.Boards),
             Order: new Order(this.$refs.Order),

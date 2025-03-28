@@ -1,0 +1,23 @@
+<footer x-data="Footer" class="footer">
+    <!-- Container -->
+    <div class="container-fixed">
+        <div
+            class="flex flex-col md:flex-row justify-center md:justify-between items-center gap-3 py-5"
+        >
+            <nav class="flex items-center order-1 gap-2 font-normal text-2sm text-gray-600">
+                <img
+                    :src="`/assets/images/${constant.project_code}/maincon-logo.png`"
+                    class="h-4"
+                    alt="Main Contractor Logo"
+                />
+                <span x-text="constant.maincon_eng_name"></span>
+            </nav>
+            <div class="flex order-2 gap-1 font-normal text-2sm">
+                <span class="text-gray-500" x-text="new Date().getFullYear()"></span>
+                <span class="text-gray-500">©</span>
+                <span class="text-gray-600">Faith Tech Solutions Limited</span>
+            </div>
+        </div>
+    </div>
+    <!-- End of Container -->
+</footer>

@@ -7,8 +7,8 @@ export default class Boards extends Component {
 
     isActive = false;
 
-    async init() {
-        await super.init();
+    init() {
+        super.init();
         this.$watchRouteUrl(this.route.url);
     }
 

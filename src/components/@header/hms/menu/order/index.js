@@ -12,8 +12,8 @@ export default class Order extends Component {
 
     activating = null;
 
-    async init() {
-        await super.init();
+    init() {
+        super.init();
         this.$watchRouteUrl(this.route.url);
     }
 

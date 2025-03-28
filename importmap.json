@@ -10,6 +10,7 @@
         "navigo": "/vendors/@shim/navigo",
         "lodash": "/vendors/@shim/lodash",
         "luxon": "/node_modules/luxon/build/es6/luxon",
+        "ag-grid-enterprise": "/vendors/@shim/ag-grid-enterprise",
 
         "iconify-icon": "/vendors/@shim/iconify-icon",
         "@iconify/json/": "/node_modules/@iconify/json/json/",

@@ -9,7 +9,7 @@ export default class ResetPasswordSuccessModal extends Component {
 
     isShown = false;
 
-    async init() {
+    init() {
         super.init();
         this.modal = KTModal.getInstance(this.$root);
     }

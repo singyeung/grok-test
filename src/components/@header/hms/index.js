@@ -6,7 +6,7 @@ export default class HMSHeader extends Component {
     id = "HMSHeader";
 
     async init() {
-        await super.init();
+        super.init();
         await this.setChildren({
             User: new User(this.$refs.User),
             Menu: new Menu(this.$refs.Menu),

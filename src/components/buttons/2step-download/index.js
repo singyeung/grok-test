@@ -19,7 +19,7 @@ export default class TwoStepDownloadButton extends Component {
     }
 
     async init() {
-        await super.init();
+        super.init();
         await this.setChildren({
             DownloadingModal: new DownloadingModal(this.$refs.DownloadingModal),
         });

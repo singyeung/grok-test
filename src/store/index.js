@@ -1,3 +1,4 @@
+import _ from "lodash";
 import Alpine from "alpinejs";
 
 export default class Store {
@@ -54,5 +55,17 @@ export default class Store {
             data = Alpine.store(this.name);
         }
         return key ? data[key] : data;
+    }
+
+    clear(key) {
+        const data = _.omit(this.get(null), [key]);
+        if (this.isPersisted) {
+            localStorage.setItem(
+                this.name,
+                typeof this.data === "object" ? JSON.stringify(data) : data,
+            );
+        } else {
+            Alpine.store(this.name, data);
+        }
     }
 }

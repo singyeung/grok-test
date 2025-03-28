@@ -6,7 +6,7 @@ export default class CardComponent extends Component {
     id = _.uniqueId("CardComponent");
     title = `Card ${this.id}`;
 
-    async init() {
+    init() {
         super.init();
     }
 

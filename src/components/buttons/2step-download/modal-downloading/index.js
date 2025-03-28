@@ -15,7 +15,7 @@ export default class DownloadingModal extends Component {
 
     message = null;
 
-    async init() {
+    init() {
         super.init();
         this.modal = KTModal.getInstance(this.$root);
     }

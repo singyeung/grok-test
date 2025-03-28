@@ -15,7 +15,7 @@ export default class LoginPage extends Page {
     errors = { password: null };
 
     async init() {
-        await super.init();
+        super.init();
         await this.setChildren({
             AuthExpiredModal: new AuthExpiredModal(this.$refs.AuthExpiredModal),
         });

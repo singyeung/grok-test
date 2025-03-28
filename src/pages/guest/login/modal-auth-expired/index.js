@@ -11,7 +11,7 @@ export default class AuthExpiredModal extends Component {
 
     onHideCallback = () => {};
 
-    async init() {
+    init() {
         super.init();
         this.modal = KTModal.getInstance(this.$root);
     }

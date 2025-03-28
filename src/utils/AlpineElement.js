@@ -4,15 +4,20 @@ import AppStore from "/src/store/app";
 import AuthStore from "/src/store/auth";
 import ThemeStore from "/src/store/theme";
 import UserStore from "/src/store/user";
+import AlpineStore from "/src/store/alpine";
 
 /**
  * @property {Object} $refs - References to Alpine $refs
  * @property {HTMLElement} $root - References to Alpine $root
+ * @property {HTMLElement} $el - References to Alpine $el
  * @property {Object} $focus - References to Alpine $focus
  * @property {Function} $dispatch - References to Alpine $dispatch function
  * @property {Function} $watch - References to Alpine $watch function
  */
 export default class AlpineElement {
+    _id = _.uniqueId("alpine_element_");
+    _self = this;
+
     id = null;
 
     children = {};
@@ -21,9 +26,8 @@ export default class AlpineElement {
 
     store = null;
 
-    _self = this;
-
     constructor() {
+        AlpineStore.set(this._id, "0");
         this.store = {
             app: AppStore.get(),
             auth: AuthStore.get(),
@@ -33,13 +37,18 @@ export default class AlpineElement {
     }
 
     init() {
+        AlpineStore.clear(this._id);
         Object.getOwnPropertyNames(Object.getPrototypeOf(this._self))
             .filter((func) => func.startsWith("$watch"))
             .forEach((func) => {
                 const variableName = func.replace("$watch", "");
-                const camelFuncName = _.camelCase(variableName);
-                const snakeFuncName = _.snakeCase(variableName);
-                const dotFuncName = _.startCase(variableName).split(" ").join(".").toLowerCase();
+                const camelFuncName = variableName.replace(/\w+/g, _.camelCase);
+                const snakeFuncName = variableName.replace(/\w+/g, _.snakeCase);
+                const dotFuncName = variableName
+                    .replace(/\w+/g, _.startCase)
+                    .split(" ")
+                    .join(".")
+                    .toLowerCase();
                 const funcName = this[camelFuncName]
                     ? camelFuncName
                     : this[snakeFuncName]
