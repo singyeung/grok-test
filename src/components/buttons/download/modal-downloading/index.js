@@ -1,6 +1,6 @@
 import { KTModal } from "metronic";
 
-import { cancelRequest } from '/src/utils/api/requestManager';
+import { cancelRequest } from "/src/utils/api/requestManager";
 
 import Component from "/src/components/";
 
@@ -17,15 +17,12 @@ export default class DownloadingModal extends Component {
 
     init() {
         super.init();
-        this.modal = KTModal.getInstance(this.$root);
-    }
-
-    updateRequestKey(requestKey) {
-        this.requestKey = requestKey;
+        this.modal = KTModal.getInstance(this.$el);
     }
 
     show(requestKey) {
         this.requestKey = requestKey;
+        if (this.isShown) return;
         this.isShown = true;
         this.modal.show();
     }

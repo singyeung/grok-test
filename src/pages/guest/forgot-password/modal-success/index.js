@@ -11,7 +11,7 @@ export default class ForgotPasswordSuccessModal extends Component {
 
     init() {
         super.init();
-        this.modal = KTModal.getInstance(this.$root);
+        this.modal = KTModal.getInstance(this.$el);
     }
 
     show() {

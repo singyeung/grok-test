@@ -36,6 +36,5 @@ export default class Component extends AlpineElement {
     async terminate() {
         await super.terminate();
         this.container = null;
-        this.params = {};
     }
 }

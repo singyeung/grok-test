@@ -1,9 +1,8 @@
-import { post, get } from "/src/utils/api/";
+import { post } from "/src/utils/api/";
 
-import Component from "/src/components/";
-import DownloadingModal from "./modal-downloading/";
+import DownloadButton from "../download/";
 
-export default class TwoStepDownloadButton extends Component {
+export default class TwoStepDownloadButton extends DownloadButton {
     id = "TwoStepDownloadButton";
 
     constructor(container, params = {}) {
@@ -13,51 +12,19 @@ export default class TwoStepDownloadButton extends Component {
         if (!params.step2) {
             throw new Error("`step2` is required for TwoStepDownloadButton");
         }
-        params.className = params.className ?? "btn btn-outline btn-success";
-        params.text = params.text ?? "Download";
+        params.url = "/";
         super(container, params);
     }
 
-    async init() {
-        super.init();
-        await this.setChildren({
-            DownloadingModal: new DownloadingModal(this.$refs.DownloadingModal),
-        });
-    }
-
     download() {
-        post(this.params.step1, {}, {}, ({ isFetching, requestKey }) => {
+        post(this.params.step1, {}, {}, ({ isFetching, requestKey, isSuccess, data }) => {
             if (!isFetching) return;
             this.children.DownloadingModal.show(requestKey);
         })
-            .then((filename) =>
-                get(
-                    `${this.params.step2}/${filename}`,
-                    {
-                        responseType: "blob",
-                    },
-                    ({ isFetching, requestKey, isSuccess, data, headers }) => {
-                        if (isFetching) {
-                            this.children.DownloadingModal.updateRequestKey(requestKey);
-                            return;
-                        }
-                        if (!isSuccess) return;
-                        const filename = headers
-                            .get("content-disposition")
-                            .replace(/.*filename=["']?([^"';]+)["']?.*/g, "$1");
-                        const url = window.URL.createObjectURL(data);
-                        const a = document.createElement("a");
-                        a.style.display = "none";
-                        a.href = url;
-                        a.download = filename;
-                        this.$root.appendChild(a);
-                        a.click();
-                        window.URL.revokeObjectURL(url);
-                        a.remove();
-                        this.children.DownloadingModal.notice(`Downloaded: ${filename}`);
-                    },
-                ),
-            )
+            .then((filename) => {
+                this.params.url = `${this.params.step2}/${filename}`;
+                super.download();
+            })
             .catch((error) => {
                 if (error.code === "ERR_CANCELED") {
                     return this.children.DownloadingModal.hide();
@@ -65,9 +32,5 @@ export default class TwoStepDownloadButton extends Component {
                     this.children.DownloadingModal.notice(error.response.data ?? error.message);
                 }
             });
-    }
-
-    get meta() {
-        return import.meta;
     }
 }

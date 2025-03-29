@@ -1,44 +1,49 @@
-import agGrid from "ag-grid-enterprise";
-import Component from "/src/components/";
+import { get } from "/src/utils/api/";
 
-export default class WorksOrderTable extends Component {
+import AgGridTable from "/src/components/ag-grid/";
+
+export default class WorksOrderTable extends AgGridTable {
     id = "WorksOrderTable";
 
-    styles = { height: "0", minHeight: "380px" };
+    columnDefs = [
+        {
+            field: "hms_wo_no",
+            suppressSizeToFit: false,
+            pinned: "left",
+            lockPinned: true,
+            headerName: `Works Order No.`,
+        },
+        { field: "ha_ref", headerName: `HA Ref.` },
+        { field: "wo_no_other", headerName: `W.O. No. Other` },
+        { field: "project_title", headerName: `Project Title`, suppressSizeToFit: false, },
+        { field: "hospital_code", headerName: `Hospital` },
+        { field: "order_type", headerName: `Order Type` },
+    ];
 
-    gridOptions = {
-        rowData: [
-            { make: "Tesla", model: "Model Y", price: 64950, electric: true },
-            { make: "Ford", model: "F-Series", price: 33850, electric: false },
-            { make: "Toyota", model: "Corolla", price: 29600, electric: false },
-        ],
-        // Column Definitions: Defines the columns to be displayed.
-        columnDefs: [
-            { field: "make" },
-            { field: "model" },
-            { field: "price" },
-            { field: "electric" },
-        ],
+    selectionColumnDef = {
+        pinned: "left",
     };
 
-    debounceResize = _.debounce(this.resize, 200);
+    rowSelection = {
+        mode: "multiRow",
+        hideDisabledCheckboxes: true,
+        selectAll: "filtered",
+        isRowSelectable: () => true,
+    };
 
-    init() {
+    constructor(container) {
+        super(container, {
+            autoResize: true,
+            honorScroll: true,
+        });
+    }
+
+    async init() {
         super.init();
 
-        agGrid.createGrid(this.$el, this.gridOptions);
-    }
+        const data = await get(`/api/ha/wo/list`);
 
-    resize() {
-        const rect = this.$el.getBoundingClientRect();
-        const absoluteY = rect.top + window.scrollY;
-        const height =
-            window.innerHeight - absoluteY - document.querySelector("footer").offsetHeight - 1;
-        this.styles.height = `${height}px`;
-    }
-
-    $watch$storeAlpine() {
-        this.debounceResize();
+        this.setData(data);
     }
 
     get meta() {
